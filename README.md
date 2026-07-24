@@ -4,14 +4,41 @@ This method calculates the wavelength shift between a measured solar spectrum an
 
 The reference spectrum and its wavelength grid are loaded from the **synthetic spectrum section of the Pandora calibration file**. The measured spectrum is read from the Pandora L0 file and dark-corrected before fitting.
 
-For each trial wavelength shift, the reference wavelength grid is shifted and the reference spectrum is interpolated onto the measured wavelength grid. A linear least-squares fit is then performed:
+## Least-Squares Spectral Fitting
 
-\[
+For each trial wavelength shift, the shifted reference spectrum is fitted to the measured spectrum using
+
+$$
 M(\lambda) \approx aR(\lambda-\Delta\lambda)+b
-\]
+$$
 
-where \(M\) is the measured spectrum, \(R\) is the reference spectrum, \(a\) is a scale factor, \(b\) is an offset, and \(\Delta\lambda\) is the wavelength shift.
+where
 
+- $M(\lambda)$ = measured spectrum
+- $R(\lambda-\Delta\lambda)$ = shifted reference spectrum
+- $a$ = scale factor
+- $b$ = constant offset
+- $\Delta\lambda$ = wavelength shift
+
+The scale factor compensates for differences in signal intensity, while the constant offset accounts for baseline differences between the measured and reference spectra.
+
+## Fitting Error
+
+The residual spectrum is calculated as
+
+$$
+r_i = M_i - \left(aR_i + b\right)
+$$
+
+The mean squared error (MSE) is then computed as
+
+$$
+\mathrm{MSE}=\frac{1}{N}\sum_{i=1}^{N}r_i^2
+$$
+
+where $N$ is the number of wavelength samples used in the fit.
+
+The MSE is calculated for every trial wavelength shift, and the shift corresponding to the minimum MSE is selected as the best wavelength alignment.
 The shift with the minimum mean squared error is selected, followed by a three-point parabolic refinement for sub-step accuracy.
 
 ## Outputs
