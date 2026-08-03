@@ -59,3 +59,6 @@ Add figures showing:
 - Measured and aligned spectra after correction
 - Mean squared error versus trial wavelength shift
 - Wavelength shift versus measurement time
+
+
+# Method 2: Wavelength Shift Estimation using Hg Lamp
