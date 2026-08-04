@@ -62,3 +62,7 @@ Add figures showing:
 
 
 # Method 2: Wavelength Shift Estimation using Hg Lamp
+
+This method calculates the wavelength shift between a measured Hg lamp spectrum and a reference Hg spectrum.
+
+Hg lamp measurement is done during Pandora calibration and can be found in Lab calibration L0 file. This Hg spectrum is read from the Lab calibration L0 file, dark-corrected before fitting and considered as reference spectrum.
